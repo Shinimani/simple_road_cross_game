@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class player
+class Player
 {
-    private:
-        int x,y; //x and y coordinates of the player
+    // private:
     public:
-        player(int width) //initialised at the center
+        int x,y; //x and y coordinates of the player
+        Player(int width) //initialised at the center
         {
             x=width/2;
             y=0;
@@ -24,7 +24,7 @@ class Lane
             width_=width;
             for(int i=0;i<width_;i++)
             {
-                cars.push_front(false);
+                cars.push_front(true);
             }
         }
 
@@ -49,8 +49,8 @@ class Lane
             for(int i=0;i<width_;i++)
             {
                 if(cars[i])
-                    cout<<"1";
-                else cout<<"0";
+                    cout<<"#";
+                else cout<<" ";
             }
             cout<<"\n";
         }
@@ -59,11 +59,44 @@ class game
 {
     private:
         bool quit;
+        int numLanes;
+        int width;
+        Player * player;
+        vector<Lane*> map;
     public:
-        
+        game(int num = 10, int w=20)
+        {
+            numLanes=num;
+            width=w;
+            quit=false;
+            for(int i =0;i<numLanes;i++)
+            {
+                map.push_back(new Lane(width));
+            }
+            player = new Player(width);
+        }
         void Draw()
         {
-
+            // system("clear");
+            cout<<"\n";
+            for(int y=0;y<numLanes;y++)
+            {
+                if(player->y==y)
+                {
+                    for(int x=0;x<width;x++)
+                    {
+                        if(map[y]->checkPos(x))
+                        {
+                            if(player->x==x)
+                                cout<<"X";
+                            else cout<<"#";
+                        } else if(player->x==x)
+                                cout<<"V";  
+                        else cout<<" ";
+                    }
+                    cout<<"\n";
+                } else map[y]->printLane();
+            }
         }
 
         void Input()
@@ -78,7 +111,7 @@ class game
 
         void Run()
         {
-            while(!quit)
+            // while(!quit)
             {
             Input();
             Draw();
@@ -91,28 +124,29 @@ class game
 int main()
 {
     srand (time(NULL));
+    game g(5,30);
+    g.Run();
+    // Lane trial(10);
 
-    Lane trial(10);
-
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
-    trial.move();
-    trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
+    // trial.move();
+    // trial.printLane();
     return 0;
 }
