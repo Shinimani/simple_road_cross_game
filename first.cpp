@@ -16,8 +16,8 @@ class player
 class Lane
 {
     private:
-        deque<bool> cars;
-        int width_;   //will contain the set of cars in that lane
+        deque<bool> cars;   //will contain the set of cars in that lane, have made with deque, can be made with bitset also, will impletement that later
+        int width_;         
     public:
         Lane(int width)     //initialised with all false, i.e. no cars
         {
@@ -30,7 +30,7 @@ class Lane
 
         void move()
         {
-            if(rand()%6==0)
+            if(rand()%6==1)
             {
                 cars.push_front(true);
             } else cars.push_front(false);
@@ -43,6 +43,16 @@ class Lane
             if (pos<width_)
                 return cars[pos];
             else return false;
+        }
+        void printLane()
+        {
+            for(int i=0;i<width_;i++)
+            {
+                if(cars[i])
+                    cout<<"1";
+                else cout<<"0";
+            }
+            cout<<"\n";
         }
 };
 class game
@@ -78,3 +88,31 @@ class game
 
 };
 
+int main()
+{
+    srand (time(NULL));
+
+    Lane trial(10);
+
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    trial.move();
+    trial.printLane();
+    return 0;
+}
